@@ -1,7 +1,7 @@
 {
   "name": "remote-presentation-hapi",
   "version": "1.0.0",
-  "description": "http://matt-harrison.com/using-hapi-js-with-socket-io/",
+  "description": "repote presentation with hapi and reveal.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
