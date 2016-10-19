@@ -1,0 +1,18 @@
+{
+  "name": "remote-presentation-hapi",
+  "version": "1.0.0",
+  "description": "http://matt-harrison.com/using-hapi-js-with-socket-io/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kildem",
+  "license": "ISC",
+  "dependencies": {
+    "handlebars": "^4.0.5",
+    "hapi": "^15.1.1",
+    "inert": "^4.0.2",
+    "socket.io": "^1.5.0",
+    "vision": "^4.1.0"
+  }
+}
