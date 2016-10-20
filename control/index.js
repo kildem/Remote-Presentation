@@ -26,6 +26,10 @@ exports.register = function (server, options, next) {
 		method: 'GET',
 		path: '/',
 		handler: Handlers.home
+	}, {
+		method: 'GET',
+		path: '/ip',
+		handler: Handlers.getIP
 	}]);
 	
 	const io = require('socket.io')(control.listener);

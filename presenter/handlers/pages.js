@@ -1,5 +1,5 @@
 exports.home = function (request, reply) {
-	return reply('hello from home');
+	return reply('Hello from Home');
 };
 
 exports.demo = function (request, reply) {
@@ -26,19 +26,23 @@ exports.receiveCommand = function (presentations, socket, command) {
 		mcmds.set('left', curppt => (curppt.indexh === 0) ? curppt : (curppt.indexh--, curppt));
 		mcmds.set('right', curppt => (curppt.indexh == curppt.hs - 1) ? curppt : (curppt.indexh++, curppt));
 
-		return mcmds.get(cmd)(cur);
+		let getCmd = mcmds.get(cmd);
+		// check if the command is valid
+		return (typeof getCmd == "undefined") ? null : mcmds.get(cmd)(cur);
 	}
 	
 	if(presentations[pptId]) {
 		var curppt = presentations[pptId];
-		presentations[pptId] = updateCommand(curppt, cmd);
-		//return presentations;
-		socket.broadcast.emit('updatedata', presentations[command.id] );
+		let newCmd = updateCommand(curppt, cmd);
+		if (newCmd) {
+			presentations[pptId] = newCmd;
+			//return presentations;
+			socket.broadcast.emit('updatedata', presentations[command.id] );
+		}
 	}
 };
 
 exports.reqPresent = function(presentations, socket, data) {
-	//console.log("********************* " + require('util').inspect(data))
 	if(presentations[data.id]) {
 		if (data.hs) presentations[data.id]['hs'] = data.hs;
 		

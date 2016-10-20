@@ -1,5 +1,5 @@
 const Pages = require('./handlers/pages');
-const Assets = require('./handlers/assets');
+
 let presentations = require('./config').config.presentations;
 
 
@@ -16,8 +16,7 @@ const after = function (server, next) {
 		path: './views',
 		layoutPath: './views/layout',
 		layout: 'default',
-		isCached: false,
-		partialsPath: './views/partials'
+		isCached: false
 	});
 	
 	

@@ -20,6 +20,7 @@ server.register([
 		if (err) {
 			throw err;
 		}
-		console.log('Server started at: ' + server.info);
+		console.log('Server started at: ' + server.connections[0].info.uri);
+		console.log('Server started at: ' + server.connections[1].info.uri);
 	});
 });
