@@ -28,7 +28,7 @@ exports.receiveCommand = function (presentations, socket, command) {
 
 		let getCmd = mcmds.get(cmd);
 		// check if the command is valid
-		return (typeof getCmd == "undefined") ? null : mcmds.get(cmd)(cur);
+		return (typeof getCmd == "undefined") ? null : getCmd(cur);
 	}
 	
 	if(presentations[pptId]) {

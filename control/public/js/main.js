@@ -1,24 +1,23 @@
-var otherDomain = 'localhost:4000/';
+var otherDomain = '192.168.0.102:4000'//'localhost:4000/';
 var socketP = io.connect(otherDomain);
 
 socketP.on('connect', function () {
 	console.log("controller connected to presenter.");
+
+	var btns = document.querySelectorAll('.ctl_btn');
+	//var touch$ = Rx.Observable.fromEvent(btns, 'touchstart');
+	var click$ = Rx.Observable.fromEvent(btns, 'click');
 	
-	var fireEvent = function(e){
-		//console.log(e.type);
-		e.preventDefault();
-		// send command (up/down/left/right)
-		var cmd = $(this).attr('cmd');
-		
-		// which presentation should I control?
-		var whichppt = $('#whichppt').val();
-		console.log("clicked: " + cmd + " " + whichppt);
-		// send command to Presenter Server
-		socketP.emit('command', {'id' : whichppt, 'txt': cmd } );
-		
-	};
-	
-	$('#mycontrols').on('touchstart', '.ctl_btn',fireEvent);
-	$('#mycontrols').on('click', '.ctl_btn',fireEvent);
+	 //Rx.Observable.merge(touch$, click$)
+	click$
+		.map(event => {return {
+			cmd: event.target.getAttribute('cmd'),
+			type: event.type
+		}})
+		.subscribe(obj => {
+			var whichppt = document.querySelector('#whichppt').value;
+			console.log( obj.type + ": " + obj.cmd + " " + whichppt);
+			socketP.emit('command', {'id' : whichppt, 'txt': obj.cmd } );
+		});
 	
 });
