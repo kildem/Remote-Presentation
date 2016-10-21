@@ -1,4 +1,4 @@
-var otherDomain = '192.168.0.102:4000'//'localhost:4000/';
+var otherDomain = 'localhost:4000/';
 var socketP = io.connect(otherDomain);
 
 socketP.on('connect', function () {
@@ -10,10 +10,10 @@ socketP.on('connect', function () {
 	
 	 //Rx.Observable.merge(touch$, click$)
 	click$
-		.map(event => {return {
+		.map(event => ({
 			cmd: event.target.getAttribute('cmd'),
 			type: event.type
-		}})
+		}))
 		.subscribe(obj => {
 			var whichppt = document.querySelector('#whichppt').value;
 			console.log( obj.type + ": " + obj.cmd + " " + whichppt);
